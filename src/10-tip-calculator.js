@@ -31,10 +31,12 @@
  */
 export function calculateTip(billAmount, serviceRating) {
 	if (billAmount <= 0 || typeof billAmount !== 'number') return null;
+
 	if (
+		typeof serviceRating !== 'number' ||
+		!Number.isInteger(serviceRating) ||
 		serviceRating < 1 ||
-		serviceRating > 5 ||
-		typeof serviceRating !== 'number'
+		serviceRating > 5
 	)
 		return null;
 
@@ -51,7 +53,7 @@ export function calculateTip(billAmount, serviceRating) {
 
 	return {
 		tipPercentage,
-		tipAmount: tipAmount.toFixed(2),
-		totalAmount: totalAmount.toFixed(2),
+		tipAmount: Number(tipAmount.toFixed(2)),
+		totalAmount: Number(totalAmount.toFixed(2)),
 	};
 }
